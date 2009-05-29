@@ -17,11 +17,11 @@ Data::Find - Find data in arbitrary data structures
 
 =head1 VERSION
 
-This document describes Data::Find version 0.02
+This document describes Data::Find version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -40,6 +40,15 @@ our $VERSION = '0.02';
 =head1 DESCRIPTION
 
 =head1 INTERFACE 
+
+Nothing is exported by default. Use, eg,
+
+  use Data::Find qw( dwith );
+
+to get the subroutines you need or call them with their fully
+qualified name:
+
+  my $iter = Data::Find::diter $data;
 
 =head2 C<< diter >>
 
@@ -76,6 +85,8 @@ The match expression can be
 
 =item * a code reference
 
+=item * C<undef>
+
 =back
 
 When the match expression is a code ref it will be passed each element
@@ -92,6 +103,9 @@ in the data structure in turn and should return true or false.
 
 Note that the match code will see I<all> of the elements in the data
 structure - not just the scalars.
+
+If the match expression is C<undef> it will match those elements whose
+value is also C<undef>.
 
 =head3 Iterator
 
